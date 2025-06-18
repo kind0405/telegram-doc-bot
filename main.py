@@ -1,6 +1,7 @@
 import telebot
 import io
 import os
+import json
 import numpy as np
 import faiss
 import threading
@@ -20,6 +21,17 @@ from googleapiclient.http import MediaIoBaseDownload
 from sentence_transformers import SentenceTransformer
 
 # --- Настройки ---
+import os
+import json
+
+# Получаем credentials.json из переменной окружения
+google_creds_json = os.getenv("GOOGLE_CREDENTIALS_JSON")
+if google_creds_json:
+    creds_dict = json.loads(google_creds_json)
+    with open("credentials.json", "w") as f:
+        json.dump(creds_dict, f)
+else:
+    print("WARNING: GOOGLE_CREDENTIALS_JSON environment variable not set")
 
 TOKEN = '7746119786:AAGm0uWy-urxACu9Q9w0lP9HQ6v610K6Vcg'
 FOLDER_ID = '1SDBfV-2Zk7lriKUsgRSS6wWnyC2O7ZX0'
